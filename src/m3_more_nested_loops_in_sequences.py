@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of SEQUENCES OF SUB-SEQUENCES.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Rui Fang.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 
 def main():
@@ -47,6 +47,7 @@ def run_test_largest_number():
 
 
 def largest_number(seq_seq):
+
     """
     Returns the largest number in the subsequences of the given
     sequence of sequences.  Returns None if there are NO numbers
@@ -71,8 +72,17 @@ def largest_number(seq_seq):
     and the given argument is a sequence of sequences,
     where each subsequence contains only numbers.
     """
+    num = -999999999999999999999999999999999
+    for k in range(len(seq_seq)):
+        seq = seq_seq[k]
+        for i in range(len(seq)):
+            if seq[i]>num:
+                num = seq[i]
+    if num == -999999999999999999999999999999999:
+        return None
+    return num
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
 
@@ -90,6 +100,21 @@ def run_test_largest_negative_number():
     print('-------------------------------------------------')
     print('Testing the   LARGEST_NEGATIVE_NUMBER   function:')
     print('-------------------------------------------------')
+
+    # Test 1:
+    expected = None
+    answer = largest_negative_number([(3, 1, 4),
+                             (13, 10, 11, 7, 10),
+                             [1, 2, 3, 4]])
+    print('Expected and actual are:', expected, answer)
+
+    # Test 2:
+    expected = -2.6
+    answer = largest_negative_number([(30, -5, 8, -20),
+         (100, -2.6, 88, -40, -5),
+         (400, 500)
+        ])
+    print('Expected and actual are:', expected, answer)
 
 
 def largest_negative_number(seq_seq):
@@ -114,8 +139,17 @@ def largest_negative_number(seq_seq):
     and the given argument is a sequence of sequences,
     where each subsequence contains only numbers.
     """
+    num = -999999999999999999999999999999999
+    for k in range(len(seq_seq)):
+        seq = seq_seq[k]
+        for i in range(len(seq)):
+            if seq[i]>num and seq[i]<0:
+                num = seq[i]
+    if num == -999999999999999999999999999999999:
+        return None
+    return num
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # CHALLENGE: Try to solve this problem with no additional sequences
@@ -354,8 +388,18 @@ def first_is_elsewhere_too(seq_seq):
       :type seq_seq: (list, tuple)
     and the given argument is a sequence of sequences.
     """
+
+    for k in range(len(seq_seq)-1):
+        seq = seq_seq[k+1]
+        first = seq_seq[0]
+        for j in range(len(first)):
+            arg = first[j]
+            for i in range(len(seq)):
+                if arg == seq[i]:
+                    return True
+    return False
     # ------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #          Some tests are already written for you (above).
     #
     # IMPLEMENTATION RESTRICTION:
